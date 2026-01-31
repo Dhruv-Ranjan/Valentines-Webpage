@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine?</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #fef2f4;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+        }
+
+        #valentine-gif {
+            max-width: 280px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+
+
+
+        h1 {
+            color: #d32f2f;
+            font-size: 2rem;
+            margin-bottom: 30px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .yes-button {
+            background-color: #e91e63;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .no-button {
+            background-color: #f0f0f0;
+            color: #555;
+            border: 1px solid #ccc;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Responsive scaling for the big button */
+        .yes-button:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="main-container">
+        <img id="valentine-gif" src="https://media.tenor.com/cWyonpnv_psAAAAj/mocha.gif" alt="Milk and Mocha Heart">
+        <h1 id="question">Will you be my Valentine?</h1>
+        <div class="buttons">
+            <button class="yes-button" id="yesButton" onclick="handleYes()">Yes</button>
+            <button class="no-button" id="noButton" onclick="handleNo()">No</button>
+        </div>
+    </div>
+
+    <script>
+        let messageIndex = 0;
+        const messages = [
+            "Are you sure?",
+            "Really sure??",
+            "Are you positive?",
+            "Just think about it!",
+            "If you say no I will be really sad...",
+            "I will be very sad...",
+            "I will be very very very sad...",
+            "Ok fine, I will stop asking...",
+            "Just kidding, say yes please! ❤️"
+        ];
+
+        function handleNo() {
+            const noButton = document.querySelector('#noButton');
+            const yesButton = document.querySelector('#yesButton');
+            
+            // Update No button text with the messages from the reel
+            noButton.textContent = messages[messageIndex];
+            messageIndex = (messageIndex + 1) % messages.length;
+            
+            // Increase the size of the Yes button
+            const currentSize = parseFloat(window.getComputedStyle(yesButton).fontSize);
+            const newSize = currentSize * 1.5;
+            yesButton.style.fontSize = `${newSize}px`;
+            
+            // Add extra padding to keep the shape as it grows
+            const currentPadding = parseFloat(window.getComputedStyle(yesButton).padding);
+            yesButton.style.padding = `${currentPadding * 1.2}px ${currentPadding * 1.4}px`;
+        }
+
+        function handleYes() {
+            // Replace the content with the success message and the hugging GIF
+            const container = document.getElementById('main-container');
+            container.innerHTML = `
+                <img id="valentine-gif" src="https://media.tenor.com/OHKT0LAthQEAAAAj/newt00th-newtooth.gif" alt="Bears Kissing">
+                <h1>Knew you would say yes! ❤️</h1>
+            `;
+        }
+    </script>
+
+</body>
+</html>
